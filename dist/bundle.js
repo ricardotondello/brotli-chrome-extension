@@ -17760,6 +17760,7 @@
 
 	const App = () => {
 	  const [valueDecompressed, setValueDecompressed] = react.useState('');
+	  const [valuePretified, setPretify] = react.useState('');
 
 	  function xToBuffer(str) {
 	    let result = '';
@@ -17833,16 +17834,29 @@
 	    rows: "10",
 	    cols: "100",
 	    placeholder: "Paste your array of bytes here or base64..."
-	  }), /*#__PURE__*/react.createElement(ReactJson, {
-	    src: ToJsonObject(valueDecompressed),
-	    name: false,
-	    displayDataTypes: false
 	  }), /*#__PURE__*/react.createElement("button", {
 	    id: "decompress_btn",
 	    onClick: () => {
 	      setValueDecompressed(decompressFunction);
 	    }
-	  }, "Decompress"), /*#__PURE__*/react.createElement("p", null, /*#__PURE__*/react.createElement("i", null, "Powered by Ricardo Tondello (@rito01)")));
+	  }, "Decompress"), /*#__PURE__*/react.createElement("button", {
+	    id: "decompress_asJson_btn",
+	    onClick: () => {
+	      setPretify(decompressFunction);
+	    }
+	  }, "Pretify"), /*#__PURE__*/react.createElement("textarea", {
+	    id: "hashdecompressed",
+	    name: "hashdecompressed",
+	    rows: "10",
+	    cols: "100",
+	    placeholder: "Result",
+	    value: valueDecompressed
+	  }), /*#__PURE__*/react.createElement(ReactJson, {
+	    src: ToJsonObject(valuePretified),
+	    name: false,
+	    displayDataTypes: false,
+	    groupArraysAfterLength: false
+	  }), /*#__PURE__*/react.createElement("p", null, /*#__PURE__*/react.createElement("i", null, "Powered by Ricardo Tondello (@rito01)")));
 	};
 
 	const root = document.querySelector('#app');
