@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import decompress from 'brotli/decompress';
 import {Buffer} from 'buffer/';
+import ReactJson from 'react-json-view';
 
 const App = () => {
   const [valueDecompressed, setValueDecompressed] = useState('')
@@ -67,12 +68,18 @@ const App = () => {
     }
   }
 
+  function ToJsonObject(value)
+  {
+    if (value === '') return;
+    return JSON.parse(value);
+  }
   return (
     <div>
       <h4>Brotli decompress</h4>
       <br />
       <textarea id="hash" name="hash" rows="10" cols="100" placeholder="Paste your array of bytes here or base64..."></textarea>
-      <textarea id="hashdecompressed" name="hashdecompressed" rows="10" cols="100" placeholder="Result" value={valueDecompressed}></textarea>
+      
+      <ReactJson src={ToJsonObject(valueDecompressed)} name={false} displayDataTypes={false}/>
       <button id="decompress_btn" onClick={() => { setValueDecompressed(decompressFunction) }}>Decompress</button>
       <p><i>Powered by Ricardo Tondello (@rito01)</i></p>
     </div>
