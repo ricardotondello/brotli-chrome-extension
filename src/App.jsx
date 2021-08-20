@@ -4,8 +4,8 @@ import {Buffer} from 'buffer/';
 import ReactJson from 'react-json-view';
 
 const App = () => {
-  const [valueDecompressed, setValueDecompressed] = useState('')
-  const [valuePretified, setPretify] = useState('')
+  const [valueDecompressed, setValueDecompressed] = useState('');
+  const [valuePretified, setPretify] = useState('');
 
   function xToBuffer(str) {
     let result = '';
@@ -34,7 +34,7 @@ const App = () => {
     return Buffer.from(resultString, "hex");
   }
 
-  function ArrayToJson(decompressed){
+  function arrayToJson(decompressed){
     var res = '';
     var chunk = 8 * 1024;
     var i;
@@ -53,7 +53,7 @@ const App = () => {
       var bufferArray = xToBuffer(str);
       var decompressed = decompress(bufferArray);
 
-      return ArrayToJson(decompressed);
+      return arrayToJson(decompressed);
     } catch (e) {
     }
 
@@ -63,30 +63,50 @@ const App = () => {
       
       var decompressed = decompress(bufferArray);
 
-      return ArrayToJson(decompressed);
+      return arrayToJson(decompressed);
     } catch (error) { 
       return 'Could not decompress: ' + error.message;
     }
   }
 
-  function ToJsonObject(value)
+  function toJsonObject(value)
   {
-    if (value === '') return;
-    return JSON.parse(value);
+    try {
+      return JSON.parse(value);
+    } catch (error) {
+      return;
+    }
   }
+
+  const handleClickDecompress = () => { setValueDecompressed(decompressFunction) }
+
+  const handleClickJson = () => { setPretify(decompressFunction) }
+
+  const handleOnChange = () => { }
 
   return (
     <div>
       <h4>Brotli decompress</h4>
-      <br />
-      <textarea id="hash" name="hash" rows="10" cols="100" placeholder="Paste your array of bytes here or base64..."></textarea>
-      <button id="decompress_btn" onClick={() => { setValueDecompressed(decompressFunction) }}>Decompress</button>
-      <button id="decompress_asJson_btn" onClick={() => { setPretify(decompressFunction) }}>Pretify</button>
+      <div style={{ display: "flex", justifyContent: "left", alignItems: "left" }}>
+          <textarea id="hash" name="hash" rows="10" cols="100" placeholder="Paste your array of bytes here or base64..." onChange={handleOnChange}></textarea>
+      </div>
+      
+      <div style={{ display: "flex", justifyContent: "right", alignItems: "right" }}>
+        <button id="decompress_btn" onClick={handleClickDecompress} >Decompress</button>
+        <button id="decompress_asJson_btn" onClick={handleClickJson} >Pretify</button>
+      </div>
 
-      <textarea id="hashdecompressed" name="hashdecompressed" rows="10" cols="100" placeholder="Result" value={valueDecompressed}></textarea>
-      <ReactJson src={ToJsonObject(valuePretified)} name={false} displayDataTypes={false} groupArraysAfterLength={false}/>
+      <div style={{ display: "flex", justifyContent: "left", alignItems: "left" }}>
+        <textarea id="hashdecompressed" name="hashdecompressed" rows="10" cols="100" placeholder="Result" value={valueDecompressed} onChange={handleOnChange}></textarea>
+      </div>
+      
+      <div style={{ display: "flex", justifyContent: "left", alignItems: "left" }}>
+        <ReactJson src={toJsonObject(valuePretified)} name={false} displayDataTypes={false} groupArraysAfterLength={false}/>
+      </div>
 
-      <p><i>Powered by Ricardo Tondello (@rito01)</i></p>
+      <div style={{fontSize: "8px"}}>
+        <p>Ricardo Tondello (@rito01)</p>
+      </div>
     </div>
   );
 };
