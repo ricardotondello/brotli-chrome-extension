@@ -88,7 +88,7 @@ const App = () => {
     <div>
       <h4>Brotli decompress</h4>
       <div style={{ display: "flex", justifyContent: "left", alignItems: "left" }}>
-          <textarea id="hash" name="hash" rows="10" cols="100" placeholder="Paste your array of bytes here or base64..." onChange={handleOnChange}></textarea>
+          <textarea id="hash" name="hash" rows="10" cols="100" placeholder="Paste your array of bytes here or base64..." onChange={handleClickDecompress}></textarea>
       </div>
       
       <div style={{ display: "flex", justifyContent: "right", alignItems: "right" }}>
