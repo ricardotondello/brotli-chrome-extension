@@ -15,7 +15,7 @@ Decompress values using Brotli.
 
 ## Installing
 
-### Follow the step above or Download the packege in the [Releases](https://github.com/ricardotondello/brotli-chrome-extension/releases)
+### Follow the step above or Download the package in the [Releases](https://github.com/ricardotondello/brotli-chrome-extension/releases)
 1. Load your extension on Chrome following:
    1.1. Access `chrome://extensions/`
    1.2. Check `Developer mode`
