@@ -13,7 +13,7 @@ Decompress values using Brotli.
 5. Run `npm install` to install the dependencies.
 6. Run `npm run build:dev`
 
-## Instaling
+## Installing
 
 ### Follow the step above or Download the packege in the [Releases](https://github.com/ricardotondello/brotli-chrome-extension/releases)
 1. Load your extension on Chrome following:
